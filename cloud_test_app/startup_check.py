@@ -50,10 +50,13 @@ def get_migration_data():
 
         num_migrations = len(migrations)
 
-        # TODO: Go through the migration lines.
-        # If the migration is a needed migration, add it to: needed_migrations
-        # If the migration is from the locking app, also add it to:
-        #   locking_migrations
+        needed_migrations = set()
+        locking_migrations = set()
+        for migration in migrations:
+            if migration[:3] == "[ ]":
+                needed_migrations.add(migration[3:])
+                if "locking" in migration:
+                    locking_migrations.add(migration[3:])
 
         return {
             'migrations': migrations,
@@ -64,7 +67,7 @@ def get_migration_data():
             # A set() with all the needed migration lines
             'locking_migrations': locking_migrations,
             # the number of needed migrations
-            'num_needed_migrations': num_needed_migrations,
+            'num_needed_migrations': len(needed_migrations),
         }
 
 
@@ -78,7 +81,7 @@ def run_migrations():
             'migrate', '--noinput', stdout=migration_output)
 
         # Will only print if the above does not fail
-        logger.info("\n" + migration_output.getvalue())
+        logger.info("\n"+ migration_output.getvalue())
 
 
 needs_migration = False
