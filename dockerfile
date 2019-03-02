@@ -16,6 +16,7 @@ RUN apk add --no-cache \
 RUN pip install -r /opt/cloud_test_app/requirements.txt
 RUN pip install gunicorn
 
+
 EXPOSE 8000
 WORKDIR /opt
 

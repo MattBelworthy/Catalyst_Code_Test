@@ -1,13 +1,7 @@
 django-bootstrap4>=0.0.7
-
 tenacity>=4.8.0
-
 requests>=2.18.4
-
 django-db-locking>=2.0.4
-
 mysqlclient>=1.3.12
-
 psycopg2>=2.6
-
 Django>=2.1.7
